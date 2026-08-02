@@ -12,6 +12,9 @@ export default defineConfig(({ mode }) => {
     'import.meta.env.VITE_CONTACT_EMAIL': JSON.stringify(
       env.VITE_CONTACT_EMAIL ?? 'info@aacec.sa'
     ),
+    'import.meta.env.VITE_MAP_ADDRESS': JSON.stringify(
+      env.VITE_MAP_ADDRESS ?? 'Riyadh, Saudi Arabia'
+    ),
   },
   resolve: {
     alias: {

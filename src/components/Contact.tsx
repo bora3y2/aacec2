@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -141,7 +141,7 @@ export default function Contact() {
 
           {/* Contact info */}
           <div className="reveal space-y-4 lg:col-span-2" style={{ transitionDelay: '0.2s' }}>
-            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
+            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue-50">
                 <MapPin className="h-6 w-6 text-brand-blue-500" />
               </div>
@@ -151,7 +151,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition-all hover:border-brand-green-200 hover:shadow-md">
+            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-green-200 hover:shadow-md">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-green-50">
                 <Phone className="h-6 w-6 text-brand-green-500" />
               </div>
@@ -161,7 +161,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-6 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
+            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue-50">
                 <Mail className="h-6 w-6 text-brand-blue-500" />
               </div>
@@ -171,21 +171,17 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Social */}
-            <div className="rounded-2xl border border-navy-100 bg-navy-900 p-6 text-white">
-              <h3 className="mb-4 font-bold">{t.contact.info.followUs}</h3>
-              <div className="flex gap-3">
-                {[Linkedin, Twitter, Facebook].map((Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 transition-all hover:bg-brand-green-500 hover:scale-110"
-                    aria-label="Social media"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </a>
-                ))}
-              </div>
+            {/* Map */}
+            <div className="overflow-hidden rounded-2xl border border-navy-100 bg-navy-900 shadow-sm">
+              <iframe
+                title="Amana Alard location map"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(import.meta.env.VITE_MAP_ADDRESS)}&z=14&output=embed`}
+                className="w-full"
+                style={{ border: 0, height: '238px' }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>

@@ -53,8 +53,10 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors hover:bg-brand-blue-50 hover:text-brand-blue-600 ${
-                scrolled ? 'text-navy-700' : 'text-navy-800'
+              className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+                scrolled
+                  ? 'text-navy-700 hover:bg-brand-blue-50 hover:text-brand-blue-600'
+                  : 'text-white hover:bg-white/10 hover:text-white'
               }`}
             >
               {link.label}
@@ -79,7 +81,11 @@ export default function Navbar() {
           <LanguageSwitcher />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 text-navy-700 transition-colors hover:bg-navy-100"
+            className={`rounded-lg p-2 transition-colors ${
+              scrolled
+                ? 'text-navy-700 hover:bg-navy-100'
+                : 'text-white hover:bg-white/10'
+            }`}
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
