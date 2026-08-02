@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -43,20 +43,7 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, '#home')}
           className="flex items-center gap-3"
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue-500 to-brand-green-500 shadow-md">
-            <Leaf className="h-6 w-6 text-white" strokeWidth={2.5} />
-          </div>
-          <span
-            className={`text-lg font-bold leading-tight transition-colors ${
-              scrolled ? 'text-navy-900' : 'text-navy-900'
-            }`}
-          >
-            {isRTL ? (
-              <span className="block">شركة أمانة الأرض</span>
-            ) : (
-              <span className="block">Amana Alard</span>
-            )}
-          </span>
+          <img src="/assets/logo/27.png" alt="Amana Alard logo" className="h-12 w-auto object-contain" />
         </a>
 
         {/* Desktop nav */}

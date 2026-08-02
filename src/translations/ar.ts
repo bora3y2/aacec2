@@ -180,7 +180,7 @@ export const ar: Translation = {
     info: {
       address: 'المملكة العربية السعودية',
       phone: '+966 XX XXX XXXX',
-      email: 'info@amana-alard.com',
+      email: 'info@aacec.sa',
       followUs: 'تابعنا',
     },
   },

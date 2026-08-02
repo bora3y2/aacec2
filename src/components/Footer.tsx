@@ -1,5 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Leaf, MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Footer() {
@@ -26,10 +26,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue-500 to-brand-green-500 shadow-md">
-                <Leaf className="h-7 w-7 text-white" strokeWidth={2.5} />
-              </div>
-              <span className="text-lg font-bold">Amana Alard</span>
+              <img src="/assets/logo/27.png" alt="Amana Alard logo" className="h-14 w-auto object-contain" />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t.footer.description}

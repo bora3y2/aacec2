@@ -181,7 +181,7 @@ export const en: Translation = {
     info: {
       address: 'Kingdom of Saudi Arabia',
       phone: '+966 XX XXX XXXX',
-      email: 'info@amana-alard.com',
+      email: 'info@aacec.sa',
       followUs: 'Follow Us',
     },
   },

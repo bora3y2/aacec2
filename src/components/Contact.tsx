@@ -8,15 +8,34 @@ export default function Contact() {
   const ref = useScrollReveal<HTMLDivElement>();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
-    // Simulate submission
-    setTimeout(() => {
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+        }),
+      });
+
+      if (!res.ok) throw new Error('Request failed');
+
       setStatus('success');
-      (e.target as HTMLFormElement).reset();
+      form.reset();
       setTimeout(() => setStatus('idle'), 5000);
-    }, 1200);
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
@@ -46,6 +65,7 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     placeholder={t.contact.form.namePlaceholder}
                     className="w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-navy-900 outline-none transition-all focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
@@ -57,6 +77,7 @@ export default function Contact() {
                   </label>
                   <input
                     type="tel"
+                    name="phone"
                     required
                     placeholder={t.contact.form.phonePlaceholder}
                     className="w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-navy-900 outline-none transition-all focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
@@ -69,6 +90,7 @@ export default function Contact() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   required
                   placeholder={t.contact.form.emailPlaceholder}
                   className="w-full rounded-xl border border-navy-200 bg-white px-4 py-3 text-navy-900 outline-none transition-all focus:border-brand-blue-400 focus:ring-2 focus:ring-brand-blue-100"
@@ -79,6 +101,7 @@ export default function Contact() {
                   {t.contact.form.message}
                 </label>
                 <textarea
+                  name="message"
                   required
                   rows={5}
                   placeholder={t.contact.form.messagePlaceholder}
@@ -144,7 +167,7 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-bold text-navy-900" dir="ltr">{t.contact.info.email}</h3>
-                <p className="mt-1 text-sm text-navy-500">info@amana-alard.com</p>
+                <p className="mt-1 text-sm text-navy-500">info@aacec.sa</p>
               </div>
             </div>
 
