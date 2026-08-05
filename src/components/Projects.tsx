@@ -3,13 +3,6 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { ArrowRight } from 'lucide-react';
 import type { Translation } from '@/translations/types';
 
-const IMAGES = [
-  'https://images.pexels.com/photos/33626641/pexels-photo-33626641.jpeg?auto=compress&cs=tinysrgb&w=900',
-  'https://images.pexels.com/photos/38071557/pexels-photo-38071557.jpeg?auto=compress&cs=tinysrgb&w=900',
-  'https://images.pexels.com/photos/2861857/pexels-photo-2861857.jpeg?auto=compress&cs=tinysrgb&w=900',
-  'https://images.pexels.com/photos/38208393/pexels-photo-38208393.jpeg?auto=compress&cs=tinysrgb&w=900',
-];
-
 type ProjectItem = Translation['projects']['items'][number];
 
 export default function Projects() {
@@ -38,7 +31,7 @@ export default function Projects() {
             >
               <div className="relative h-80 overflow-hidden">
                 <img
-                  src={IMAGES[i]}
+                  src={project.image}
                   alt={project.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -46,20 +39,27 @@ export default function Projects() {
               </div>
 
               <div className="absolute inset-x-0 bottom-0 p-6">
-                <span className="mb-2 inline-block rounded-full bg-brand-green-500/90 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                  {project.sector}
-                </span>
                 <h3 className="text-lg font-bold text-white">{project.title}</h3>
-                <p className="mt-2 max-h-0 overflow-hidden text-sm text-white/80 opacity-0 transition-all duration-300 group-hover:max-h-20 group-hover:opacity-100">
+                <p className="mt-2 max-h-0 overflow-hidden text-sm text-white/80 opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
                   {project.description}
                 </p>
-                <div className="mt-3 flex items-center gap-1 text-sm font-semibold text-brand-green-300 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  <span>{t.cta.secondaryButton}</span>
-                  <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-                </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="reveal mt-12 text-center">
+          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-navy-600">
+            {t.cta.subtitle}
+          </p>
+          <button
+            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-brand-green-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-brand-green-500/30 transition-all hover:bg-brand-green-600 hover:shadow-xl hover:shadow-brand-green-500/40"
+          >
+            {t.hero.ctaPrimary}
+            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+          </button>
         </div>
       </div>
     </section>

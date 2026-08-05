@@ -1,16 +1,16 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
-  Users,
-  FlaskConical,
-  Globe2,
-  MapPin,
-  Layers,
+  Award,
+  BadgeCheck,
   ShieldCheck,
+  Lightbulb,
+  Clock,
+  Handshake,
 } from 'lucide-react';
 import type { ServiceItem } from '@/translations/types';
 
-const ICONS = [Users, FlaskConical, ShieldCheck, MapPin, Layers, Globe2];
+const ICONS = [Award, BadgeCheck, ShieldCheck, Lightbulb, Clock, Handshake];
 
 export default function WhyUs() {
   const { t } = useLanguage();
@@ -37,7 +37,7 @@ export default function WhyUs() {
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {t.whyUs.items.map((item: ServiceItem, i: number) => {
-            const Icon = ICONS[i] ?? Users;
+            const Icon = ICONS[i] ?? Award;
             return (
               <div
                 key={i}

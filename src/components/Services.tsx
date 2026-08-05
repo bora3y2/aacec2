@@ -3,14 +3,14 @@ import { useScrollReveal } from '@/hooks/useScrollReveal';
 import {
   FileText,
   ClipboardCheck,
+  ShieldCheck,
   Recycle,
   Sprout,
-  GraduationCap,
-  Gauge,
+  Compass,
 } from 'lucide-react';
 import type { ServiceItem } from '@/translations/types';
 
-const ICONS = [FileText, ClipboardCheck, Recycle, Sprout, GraduationCap, Gauge];
+const ICONS = [FileText, ClipboardCheck, ShieldCheck, Recycle, Sprout, Compass];
 
 export default function Services() {
   const { t } = useLanguage();

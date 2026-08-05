@@ -23,8 +23,10 @@ export interface ServiceItem {
 }
 
 export interface StatItem {
-  value: string;
+  value: number;
   label: string;
+  prefix?: string;
+  suffix?: string;
 }
 
 export interface Translation {
@@ -37,12 +39,7 @@ export interface Translation {
     subheadline: string;
     ctaPrimary: string;
     ctaSecondary: string;
-    stat1Value: string;
-    stat1Label: string;
-    stat2Value: string;
-    stat2Label: string;
-    stat3Value: string;
-    stat3Label: string;
+    stats: StatItem[];
   };
   about: {
     sectionLabel: string;
@@ -50,14 +47,7 @@ export interface Translation {
     description: string;
     vision: { title: string; text: string };
     mission: { title: string; text: string };
-    stat1Value: string;
-    stat1Label: string;
-    stat2Value: string;
-    stat2Label: string;
-    stat3Value: string;
-    stat3Label: string;
-    stat4Value: string;
-    stat4Label: string;
+    stats: StatItem[];
   };
   services: {
     sectionLabel: string;
@@ -75,7 +65,7 @@ export interface Translation {
     sectionLabel: string;
     title: string;
     subtitle: string;
-    items: { title: string; sector: string; description: string }[];
+    items: { title: string; description: string; image: string }[];
   };
   cta: {
     title: string;
@@ -105,6 +95,7 @@ export interface Translation {
       address: string;
       phone: string;
       email: string;
+      whatsapp: string;
       followUs: string;
     };
   };

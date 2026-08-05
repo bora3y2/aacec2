@@ -1,11 +1,35 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useCountUp } from '@/hooks/useCountUp';
 import { ArrowRight, Leaf, Droplets, Wind } from 'lucide-react';
+import type { StatItem } from '@/translations/types';
 
-const HERO_IMG =
-  'https://images.pexels.com/photos/38071557/pexels-photo-38071557.jpeg?auto=compress&cs=tinysrgb&w=1920';
+const HERO_IMG = '/assets/sections/hero-bg.jpeg';
+
+const STAT_ICONS = [Leaf, Droplets, Wind];
+
+function StatCounter({ stat, index }: { stat: StatItem; index: number }) {
+  const { ref, value } = useCountUp<HTMLSpanElement>(stat.value);
+  const Icon = STAT_ICONS[index] ?? Leaf;
+
+  return (
+    <div>
+      <div className="flex items-center gap-1.5">
+        <Icon className="h-5 w-5 text-brand-green-300" />
+        <span ref={ref} className="text-2xl font-bold text-white sm:text-3xl" dir="ltr">
+          {stat.prefix}
+          {value}
+          {stat.suffix}
+        </span>
+      </div>
+      <p className="mt-1 text-xs text-white/70 sm:text-sm">{stat.label}</p>
+    </div>
+  );
+}
 
 export default function Hero() {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
+  const ref = useScrollReveal<HTMLDivElement>();
 
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
@@ -17,7 +41,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
-          alt="Aerial view of a forest surrounding a clear river"
+          alt="Environmental consulting field work"
           className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/85" />
@@ -25,7 +49,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center container-px pt-24">
+      <div ref={ref} className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center container-px pt-32">
         <div className="max-w-3xl">
           {/* Badge */}
           <div className="mb-6 inline-flex animate-fade-in items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
@@ -71,20 +95,8 @@ export default function Hero() {
             className="mt-14 grid animate-fade-up grid-cols-3 gap-4 border-t border-white/15 pt-8 sm:gap-8"
             style={{ animationDelay: '0.45s', animationFillMode: 'both' }}
           >
-            {[
-              { value: t.hero.stat1Value, label: t.hero.stat1Label },
-              { value: t.hero.stat2Value, label: t.hero.stat2Label },
-              { value: t.hero.stat3Value, label: t.hero.stat3Label },
-            ].map((stat, i) => (
-              <div key={i}>
-                <div className="flex items-center gap-1.5">
-                  {i === 0 && <Leaf className="h-5 w-5 text-brand-green-300" />}
-                  {i === 1 && <Droplets className="h-5 w-5 text-brand-blue-300" />}
-                  {i === 2 && <Wind className="h-5 w-5 text-white/70" />}
-                  <span className="text-2xl font-bold text-white sm:text-3xl">{stat.value}</span>
-                </div>
-                <p className="mt-1 text-xs text-white/70 sm:text-sm">{stat.label}</p>
-              </div>
+            {t.hero.stats.map((stat, i) => (
+              <StatCounter key={i} stat={stat} index={i} />
             ))}
           </div>
         </div>

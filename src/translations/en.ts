@@ -16,24 +16,23 @@ export const en: Translation = {
 
   hero: {
     badge: 'Environmental Consulting Experts',
-    headline: 'Building a More Sustainable Future',
+    headline: 'Environmental Solutions and Consultancy for Compliance and Sustainability',
     subheadline:
-      'We partner with government and private sector clients to achieve environmental compliance, sustainability, and responsible development through rigorous scientific methodology.',
+      'We help organizations prepare environmental studies, obtain permits, conduct environmental audits, and build environmental management plans in line with the regulations and requirements in force across the Kingdom',
     ctaPrimary: 'Contact Us',
     ctaSecondary: 'Explore Our Services',
-    stat1Value: '10+',
-    stat1Label: 'Years of Experience',
-    stat2Value: '200+',
-    stat2Label: 'Projects Completed',
-    stat3Value: '150+',
-    stat3Label: 'Clients Served',
+    stats: [
+      { value: 10, suffix: '+', label: 'Years of Experience' },
+      { value: 200, suffix: '+', label: 'Projects Completed' },
+      { value: 150, suffix: '+', label: 'Clients Served' },
+    ],
   },
 
   about: {
     sectionLabel: 'Who We Are',
-    title: 'Committed to the Earth, Accountable to the Future',
+    title: 'Your Trusted Partner in Environmental Consultancy and Compliance',
     description:
-      'Amana Alard Company for Environmental Consulting is a specialized firm dedicated to delivering scientific and professional environmental solutions. We serve government agencies and private sector organizations seeking to align their operations with sustainability goals and regulatory standards.',
+      'Amana Alard Company for Environmental Consulting is a Saudi specialized firm providing environmental solutions and consultancy, preparing environmental studies, conducting environmental audits, and building environmental management plans that support compliance and sustainability for both government and private sector projects',
     vision: {
       title: 'Our Vision',
       text: 'To be the leading environmental consulting firm in the region, recognized for scientific excellence, integrity, and measurable environmental impact.',
@@ -42,84 +41,88 @@ export const en: Translation = {
       title: 'Our Mission',
       text: 'To provide integrated environmental consulting services that help our clients achieve sustainable development, regulatory compliance, and environmental stewardship — grounded in science and international best practices.',
     },
-    stat1Value: '10+',
-    stat1Label: 'Years of Experience',
-    stat2Value: '200+',
-    stat2Label: 'Projects Completed',
-    stat3Value: '150+',
-    stat3Label: 'Clients Served',
-    stat4Value: '30+',
-    stat4Label: 'Expert Consultants',
+    stats: [
+      { value: 10, suffix: '+', label: 'Years of Experience' },
+      { value: 200, suffix: '+', label: 'Projects Completed' },
+      { value: 150, suffix: '+', label: 'Clients Served' },
+      { value: 30, suffix: '+', label: 'Expert Consultants' },
+    ],
   },
 
   services: {
     sectionLabel: 'What We Do',
-    title: 'Comprehensive Environmental Consulting Services',
+    title: 'Integrated Environmental Solutions for Your Projects and Facilities',
     subtitle:
-      'From impact assessment to sustainability strategy, we offer end-to-end solutions tailored to your sector and regulatory environment.',
+      'We provide specialized environmental consultancy covering impact assessment studies, environmental compliance and permits, environmental management plans, waste management, and sustainability studies — supporting compliance and project success',
     items: [
       {
         title: 'Environmental Impact Assessment (EIA)',
         description:
-          'Rigorous EIA studies prepared in accordance with national regulations and international standards, covering all project phases.',
+          'Preparing environmental impact assessment studies per competent authority requirements, evaluating environmental impacts, and identifying suitable mitigation measures to support environmental compliance and sustainable development',
       },
       {
-        title: 'Environmental Compliance & Permitting',
+        title: 'Environmental Audits & Management Plans',
         description:
-          'Guidance through regulatory approval processes, permit applications, and ongoing compliance monitoring for industrial and development projects.',
+          'Environmental audits and the preparation of environmental management and mitigation implementation plans to raise compliance and improve environmental performance',
       },
       {
-        title: 'Waste Management Solutions',
+        title: 'Environmental Compliance & Permits',
         description:
-          'Comprehensive waste management plans covering solid, liquid, and hazardous waste — from strategy to implementation and auditing.',
+          'Supporting facilities in meeting environmental compliance requirements, preparing environmental records and self-monitoring reports, and managing permit issuance and renewal',
       },
       {
-        title: 'Sustainability & ESG Studies',
+        title: 'Waste Management',
         description:
-          'Environmental and social responsibility assessments aligned with international ESG frameworks to support responsible investment and reporting.',
+          'Preparing waste management plans including classification, storage, transport, and disposal in line with environmental regulations and best practices',
       },
       {
-        title: 'Environmental Training & Awareness',
+        title: 'Sustainability & ESG Reports',
         description:
-          'Customized training programs for corporate teams, government staff, and field personnel on environmental regulations and best practices.',
+          'Preparing sustainability studies and Environmental, Social, and Governance (ESG) and environmental responsibility reports, supporting sustainable development and environmental performance initiatives',
       },
       {
-        title: 'Air, Water & Soil Quality Monitoring',
+        title: 'Environmental Consultancy for Projects',
         description:
-          'Field sampling, laboratory analysis, and technical reporting for air emissions, water quality, and soil contamination assessments.',
+          'Providing environmental consultancy across all project phases — planning, design, and operation — to ensure regulatory compliance and reduce environmental risk',
       },
     ],
   },
 
   whyUs: {
     sectionLabel: 'Why Choose Us',
-    title: 'Science-Based. Standards-Driven. Results-Focused.',
+    title: 'Trusted Expertise... Environmental Solutions That Make a Difference',
     subtitle:
-      'Our clients choose us because we combine deep technical expertise with practical, actionable solutions.',
+      'We are committed to providing environmental consultancy that combines technical expertise, regulatory compliance, and practical solutions to help our clients achieve environmental compliance and sustain their projects',
     items: [
       {
-        title: 'Expert Team',
-        description: 'A multidisciplinary team of certified environmental scientists, engineers, and legal specialists.',
+        title: 'Specialized Expertise',
+        description:
+          'We bring experience in delivering environmental studies and consultancy across sectors, with deep understanding of environmental regulations to provide practical solutions that meet our clients\' needs',
       },
       {
-        title: 'Scientific Rigor',
-        description: 'Every study and recommendation is grounded in validated methodology and peer-reviewed science.',
+        title: 'Quality & Reliability',
+        description:
+          'We prepare accurate, reliable environmental studies and reports using scientific methodologies and professional best practices to ensure quality outputs and the highest credibility',
       },
       {
-        title: 'International Standards',
-        description: 'Full compliance with ISO, IFC Performance Standards, ESIA guidelines, and regional regulations.',
+        title: 'Regulatory Compliance',
+        description:
+          'We support facilities in achieving compliance with environmental laws through specialized solutions aligned with the Kingdom\'s regulatory requirements',
       },
       {
-        title: 'Wide Geographic Reach',
-        description: 'Active project experience across the Gulf, MENA region, and African markets.',
+        title: 'Practical Solutions',
+        description:
+          'We deliver integrated, actionable environmental solutions tailored to each project that manage environmental risk and enhance business sustainability',
       },
       {
-        title: 'Sector Diversity',
-        description: 'Expertise spanning energy, infrastructure, industry, agriculture, and urban development sectors.',
+        title: 'Commitment to Deadlines',
+        description:
+          'We complete and deliver studies and reports within agreed timelines while maintaining output quality and accuracy throughout',
       },
       {
-        title: 'Confidentiality & Integrity',
-        description: 'Strict ethical standards and professional confidentiality on all client engagements.',
+        title: 'Ongoing Partnership',
+        description:
+          'We believe project success relies on continuous collaboration, providing technical and advisory support at every stage toward achieving our clients\' environmental goals',
       },
     ],
   },
@@ -127,27 +130,28 @@ export const en: Translation = {
   projects: {
     sectionLabel: 'Our Work',
     title: 'Selected Projects & Sectors',
-    subtitle: 'A track record of delivering credible, actionable environmental consulting across diverse sectors.',
+    subtitle:
+      'We are proud to deliver environmental projects and consultancy across diverse sectors, offering practical solutions that support environmental compliance and project sustainability under applicable regulations',
     items: [
       {
-        title: 'Industrial Zone EIA',
-        sector: 'Industrial Development',
-        description: 'Comprehensive environmental impact assessment for a major industrial complex.',
+        title: 'Industry & Mining',
+        description: 'Specialized environmental solutions and consultancy for industrial and mining projects',
+        image: '/assets/sections/projects-industry.jpeg',
       },
       {
-        title: 'River Basin Water Quality Study',
-        sector: 'Water Resources',
-        description: 'Multi-site water sampling and quality analysis across a regional river basin.',
+        title: 'Agriculture & Water Resources',
+        description: 'Environmental studies supporting agricultural sustainability and water resource management',
+        image: '/assets/sections/projects-agriculture.jpeg',
       },
       {
-        title: 'Renewable Energy Compliance',
-        sector: 'Energy & Power',
-        description: 'Environmental permitting and compliance support for a large-scale wind farm project.',
+        title: 'Construction & Urban Development',
+        description: 'Integrated environmental services for construction and urban development projects',
+        image: '/assets/sections/projects-construction.jpeg',
       },
       {
-        title: 'Urban Development Sustainability Plan',
-        sector: 'Urban Planning',
-        description: 'Integrated sustainability and environmental management plan for a new city district.',
+        title: 'Workshops & Service Facilities',
+        description: 'Environmental consultancy for compliance and improved environmental performance',
+        image: '/assets/sections/projects-services.jpeg',
       },
     ],
   },
@@ -155,15 +159,16 @@ export const en: Translation = {
   cta: {
     title: 'Ready to Build a More Sustainable Future?',
     subtitle:
-      'Connect with our team to discuss your project. We provide tailored environmental consulting solutions that meet your timeline, budget, and regulatory requirements.',
-    button: 'Request a Consultation',
-    secondaryButton: 'Learn More About Our Services',
+      'Contact us to discuss your project needs, and we will provide the right environmental solutions to help you achieve compliance and sustainability efficiently',
+    button: 'Contact Us',
+    secondaryButton: 'Explore Our Services',
   },
 
   contact: {
     sectionLabel: 'Get In Touch',
-    title: 'Contact Us',
-    subtitle: 'Our team is ready to assist you with your environmental consulting needs.',
+    title: 'Contact Our Environmental Experts',
+    subtitle:
+      'Our team is glad to answer your inquiries and provide the appropriate environmental solutions and consultancy for your project needs',
     form: {
       name: 'Full Name',
       namePlaceholder: 'Your full name',
@@ -179,9 +184,10 @@ export const en: Translation = {
       error: 'An error occurred. Please try again.',
     },
     info: {
-      address: 'Kingdom of Saudi Arabia',
-      phone: '+966 XX XXX XXXX',
+      address: 'Riyadh – Kingdom of Saudi Arabia',
+      phone: '+966 53 275 5899',
       email: 'info@aacec.sa',
+      whatsapp: 'Chat with us on WhatsApp',
       followUs: 'Follow Us',
     },
   },

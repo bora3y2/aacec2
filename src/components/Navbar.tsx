@@ -43,7 +43,7 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, '#home')}
           className="flex items-center gap-3"
         >
-          <img src="/assets/logo/27.png" alt="Amana Alard logo" className="h-12 w-auto object-contain" />
+          <img src="/assets/logo/27.png" alt="Amana Alard logo" className="h-14 w-auto object-contain sm:h-16" />
         </a>
 
         {/* Desktop nav */}

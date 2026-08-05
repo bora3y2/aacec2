@@ -3,6 +3,11 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 import { MapPin, Phone, Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react';
 
+const WHATSAPP_NUMBER = (import.meta.env.VITE_CONTACT_PHONE || '+9660532755899').replace(
+  /[^0-9]/g,
+  ''
+);
+
 export default function Contact() {
   const { t } = useLanguage();
   const ref = useScrollReveal<HTMLDivElement>();
@@ -141,27 +146,43 @@ export default function Contact() {
 
           {/* Contact info */}
           <div className="reveal space-y-4 lg:col-span-2" style={{ transitionDelay: '0.2s' }}>
+            {/* Company card with logo */}
+            <div className="flex flex-col items-center gap-4 rounded-2xl bg-gradient-to-br from-navy-900 via-brand-blue-900 to-brand-green-900 p-8 text-center shadow-lg">
+              <img
+                src="/assets/logo/27.png"
+                alt="Amana Alard logo"
+                className="h-28 w-auto object-contain"
+              />
+              <p className="text-lg font-bold text-white">{t.contact.title}</p>
+              <p className="text-sm leading-relaxed text-white/70">{t.contact.subtitle}</p>
+            </div>
+
             <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue-50">
                 <MapPin className="h-6 w-6 text-brand-blue-500" />
               </div>
               <div>
                 <h3 className="font-bold text-navy-900">{t.contact.info.address}</h3>
-                <p className="mt-1 text-sm text-navy-500">Riyadh, Saudi Arabia</p>
+                <p className="mt-1 text-sm text-navy-500">{import.meta.env.VITE_MAP_ADDRESS}</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-green-200 hover:shadow-md">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-green-200 hover:shadow-md"
+            >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-green-50">
                 <Phone className="h-6 w-6 text-brand-green-500" />
               </div>
               <div>
-                <h3 className="font-bold text-navy-900">{t.contact.info.phone}</h3>
+                <h3 className="font-bold text-navy-900">{t.contact.info.whatsapp}</h3>
                 <p className="mt-1 text-sm text-navy-500" dir="ltr">
                   {import.meta.env.VITE_CONTACT_PHONE}
                 </p>
               </div>
-            </div>
+            </a>
 
             <div className="flex items-start gap-4 rounded-2xl border border-navy-100 bg-white p-4 shadow-sm transition-all hover:border-brand-blue-200 hover:shadow-md">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-brand-blue-50">
@@ -179,7 +200,7 @@ export default function Contact() {
                 title="Amana Alard location map"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(import.meta.env.VITE_MAP_ADDRESS)}&z=14&output=embed`}
                 className="w-full"
-                style={{ border: 0, height: '238px' }}
+                style={{ border: 0, height: '360px' }}
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
