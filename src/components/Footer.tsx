@@ -65,7 +65,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-sm text-white/60">
                 <Phone className="h-4 w-4 shrink-0 text-brand-blue-400" />
-                <span dir="ltr">{t.contact.info.phone}</span>
+                <span dir="ltr">{import.meta.env.VITE_CONTACT_PHONE}</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/60">
                 <Mail className="h-4 w-4 shrink-0 text-brand-blue-400" />

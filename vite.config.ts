@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
     'import.meta.env.VITE_MAP_ADDRESS': JSON.stringify(
       env.VITE_MAP_ADDRESS ?? 'Riyadh, Saudi Arabia'
     ),
+    'import.meta.env.VITE_CONTACT_PHONE': JSON.stringify(
+      env.VITE_CONTACT_PHONE ?? '+9660532755899'
+    ),
   },
   resolve: {
     alias: {

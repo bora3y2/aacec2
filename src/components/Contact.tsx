@@ -157,7 +157,9 @@ export default function Contact() {
               </div>
               <div>
                 <h3 className="font-bold text-navy-900">{t.contact.info.phone}</h3>
-                <p className="mt-1 text-sm text-navy-500" dir="ltr">+966 11 XXX XXXX</p>
+                <p className="mt-1 text-sm text-navy-500" dir="ltr">
+                  {import.meta.env.VITE_CONTACT_PHONE}
+                </p>
               </div>
             </div>
 
