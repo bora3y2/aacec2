@@ -44,8 +44,6 @@ export default function Hero() {
           alt="Environmental consulting field work"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-blue-900/40 to-brand-green-900/30" />
       </div>
 
       {/* Content */}
