@@ -1,7 +1,8 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import express from 'express';
 import nodemailer from 'nodemailer';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -32,28 +33,11 @@ const MIME = {
 };
 
 function json(res, status, body) {
-  res.writeHead(status, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(body));
+  res.status(status).json(body);
 }
 
-function readBody(req) {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', (chunk) => (data += chunk));
-    req.on('end', () => {
-      try {
-        resolve(JSON.parse(data || '{}'));
-      } catch (err) {
-        reject(err);
-      }
-    });
-    req.on('error', reject);
-  });
-}
-
-async function serveStatic(req, res) {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const requested = normalize(url.pathname).replace(/^(\.\.[/\\])+/, '');
+async function serveStatic(req, res, next) {
+  const requested = req.path;
   let filePath = join(DIST_DIR, requested === '/' ? 'index.html' : requested);
 
   try {
@@ -61,37 +45,25 @@ async function serveStatic(req, res) {
     if (info.isDirectory()) {
       filePath = join(filePath, 'index.html');
     }
-  } catch {
-    if (url.pathname.includes('.')) {
-      json(res, 404, { error: 'Not found' });
-      return;
-    }
-    filePath = join(DIST_DIR, 'index.html');
-  }
-
-  try {
     const content = await readFile(filePath);
-    const type = MIME[extname(filePath).toLowerCase()] ?? 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': type });
-    res.end(content);
+    res.setHeader('Content-Type', MIME[extname(filePath).toLowerCase()] ?? 'application/octet-stream');
+    return res.send(content);
   } catch {
-    json(res, 404, { error: 'Not found' });
+    if (requested.includes('.')) {
+      return json(res, 404, { error: 'Not found' });
+    }
+    try {
+      const index = await readFile(join(DIST_DIR, 'index.html'));
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.send(index);
+    } catch {
+      return next();
+    }
   }
 }
 
 async function handleContact(req, res) {
-  if (req.method !== 'POST') {
-    return json(res, 405, { error: 'Method not allowed' });
-  }
-
-  let body;
-  try {
-    body = await readBody(req);
-  } catch {
-    return json(res, 400, { error: 'Invalid JSON body' });
-  }
-
-  const { name, phone, email, message } = body;
+  const { name, phone, email, message } = req.body ?? {};
 
   if (!name || !email || !message) {
     return json(res, 400, { error: 'Missing required fields' });
@@ -135,13 +107,13 @@ async function handleContact(req, res) {
   }
 }
 
-createServer((req, res) => {
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  if (url.pathname === '/api/contact') {
-    return handleContact(req, res);
-  }
-  return serveStatic(req, res);
-}).listen(PORT, () => {
+const app = express();
+app.use(express.json());
+app.post('/api/contact', handleContact);
+app.get('*', serveStatic);
+
+const server = createServer(app);
+server.listen(PORT, () => {
   console.log(`AACEC server running on port ${PORT}`);
   console.log(`Serving static files from ${DIST_DIR}`);
   console.log(`Contact form enabled via SMTP: ${Boolean(process.env.SMTP_HOST)}`);
