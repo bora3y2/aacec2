@@ -23,6 +23,9 @@
 }
 
 @layer utilities {
+  .pt-32 {
+    padding-top: 2rem;
+  }
   .reveal {
     opacity: 0;
     transform: translateY(24px);

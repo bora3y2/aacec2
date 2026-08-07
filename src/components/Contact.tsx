@@ -187,9 +187,9 @@ export default function Contact() {
             <div className="overflow-hidden rounded-2xl border border-navy-100 bg-navy-900 shadow-sm">
               <iframe
                 title="Amana Alard location map"
-                src={`https://www.google.com/maps?q=${encodeURIComponent(import.meta.env.VITE_MAP_ADDRESS)}&z=14&output=embed`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(import.meta.env.VITE_MAP_ADDRESS)}&z=16&output=embed`}
                 className="w-full"
-                style={{ border: 0, height: '310px' }}
+                style={{ border: 0, height: '235px' }}
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
