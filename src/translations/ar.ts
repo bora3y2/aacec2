@@ -136,22 +136,22 @@ export const ar: Translation = {
       {
         title: 'الصناعة والتعدين',
         description: 'حلول واستشارات بيئية متخصصة للمشاريع الصناعية والتعدينية',
-        image: '/assets/sections/projects-industry.jpeg',
+        image: '/assets/sections/projects-industry-v3.jpeg',
       },
       {
         title: 'الزراعة والموارد المائية',
         description: 'دراسات بيئية تدعم استدامة المشاريع الزراعية وإدارة الموارد المائية',
-        image: '/assets/sections/projects-agriculture.jpeg',
+        image: '/assets/sections/projects-agriculture-v3.jpeg',
       },
       {
         title: 'الإنشاءات والتطوير العمراني',
         description: 'خدمات بيئية متكاملة لمشاريع البناء والتطوير العمراني',
-        image: '/assets/sections/projects-construction.jpeg',
+        image: '/assets/sections/projects-construction-v3.jpeg',
       },
       {
         title: 'الورش الحرفية والمنشآت الخدمية',
         description: 'استشارات بيئية لتحقيق الامتثال ورفع كفاءة الأداء البيئي',
-        image: '/assets/sections/projects-services.jpeg',
+        image: '/assets/sections/projects-services-v3.jpeg',
       },
     ],
   },

@@ -136,22 +136,22 @@ export const en: Translation = {
       {
         title: 'Industry & Mining',
         description: 'Specialized environmental solutions and consultancy for industrial and mining projects',
-        image: '/assets/sections/projects-industry.jpeg',
+        image: '/assets/sections/projects-industry-v3.jpeg',
       },
       {
         title: 'Agriculture & Water Resources',
         description: 'Environmental studies supporting agricultural sustainability and water resource management',
-        image: '/assets/sections/projects-agriculture.jpeg',
+        image: '/assets/sections/projects-agriculture-v3.jpeg',
       },
       {
         title: 'Construction & Urban Development',
         description: 'Integrated environmental services for construction and urban development projects',
-        image: '/assets/sections/projects-construction.jpeg',
+        image: '/assets/sections/projects-construction-v3.jpeg',
       },
       {
         title: 'Workshops & Service Facilities',
         description: 'Environmental consultancy for compliance and improved environmental performance',
-        image: '/assets/sections/projects-services.jpeg',
+        image: '/assets/sections/projects-services-v3.jpeg',
       },
     ],
   },
