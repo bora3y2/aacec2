@@ -1,6 +1,5 @@
-import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
-import { extname, join } from 'node:path';
+import { readFile } from 'node:fs/promises';
+import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import nodemailer from 'nodemailer';
@@ -9,6 +8,10 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const DIST_DIR = join(__dirname, 'dist');
 const PORT = Number(process.env.PORT ?? 3000);
 const RECIPIENT = process.env.CONTACT_EMAIL ?? 'info@aacec.sa';
+
+function json(res, status, body) {
+  res.status(status).json(body);
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -32,33 +35,19 @@ const MIME = {
   '.webmanifest': 'application/manifest+json',
 };
 
-function json(res, status, body) {
-  res.status(status).json(body);
-}
-
-async function serveStatic(req, res, next) {
-  const requested = req.path;
-  let filePath = join(DIST_DIR, requested === '/' ? 'index.html' : requested);
-
+async function serveIndex(req, res, next) {
   try {
-    const info = await stat(filePath);
-    if (info.isDirectory()) {
-      filePath = join(filePath, 'index.html');
+    const content = await readFile(join(DIST_DIR, 'index.html'));
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.status(200).send(content);
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      console.error(`Missing ${join(DIST_DIR, 'index.html')} — did the build run?`);
+      return json(res, 500, {
+        error: 'Frontend build not found on server. Run npm run build before starting.',
+      });
     }
-    const content = await readFile(filePath);
-    res.setHeader('Content-Type', MIME[extname(filePath).toLowerCase()] ?? 'application/octet-stream');
-    return res.send(content);
-  } catch {
-    if (requested.includes('.')) {
-      return json(res, 404, { error: 'Not found' });
-    }
-    try {
-      const index = await readFile(join(DIST_DIR, 'index.html'));
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      return res.send(index);
-    } catch {
-      return next();
-    }
+    return next(err);
   }
 }
 
@@ -110,10 +99,10 @@ async function handleContact(req, res) {
 const app = express();
 app.use(express.json());
 app.post('/api/contact', handleContact);
-app.get('*', serveStatic);
+app.use(express.static(DIST_DIR, { extensions: ['html'] }));
+app.use(serveIndex);
 
-const server = createServer(app);
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`AACEC server running on port ${PORT}`);
   console.log(`Serving static files from ${DIST_DIR}`);
   console.log(`Contact form enabled via SMTP: ${Boolean(process.env.SMTP_HOST)}`);
