@@ -1,54 +1,51 @@
-import { readFile } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { execSync } from 'node:child_process';
+import { readFile, stat } from 'node:fs/promises';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
 import nodemailer from 'nodemailer';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const DIST_DIR = join(__dirname, 'dist');
 const PORT = Number(process.env.PORT ?? 3000);
 const RECIPIENT = process.env.CONTACT_EMAIL ?? 'info@aacec.sa';
 
-function json(res, status, body) {
-  res.status(status).json(body);
+const DIST_CANDIDATES = [
+  join(__dirname, 'dist'),
+  join(process.cwd(), 'dist'),
+];
+
+async function findDistDir() {
+  for (const dir of DIST_CANDIDATES) {
+    try {
+      await stat(join(dir, 'index.html'));
+      return dir;
+    } catch {
+      /* keep looking */
+    }
+  }
+  return DIST_CANDIDATES[0];
 }
 
-const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.mjs': 'text/javascript; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.jpeg': 'image/jpeg',
-  '.jpg': 'image/jpeg',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.webp': 'image/webp',
-  '.gif': 'image/gif',
-  '.ico': 'image/x-icon',
-  '.woff': 'font/woff',
-  '.woff2': 'font/woff2',
-  '.ttf': 'font/ttf',
-  '.txt': 'text/plain; charset=utf-8',
-  '.map': 'application/json',
-  '.xml': 'application/xml',
-  '.webmanifest': 'application/manifest+json',
-};
-
-async function serveIndex(req, res, next) {
+async function ensureFrontend() {
+  const distDir = await findDistDir();
   try {
-    const content = await readFile(join(DIST_DIR, 'index.html'));
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    return res.status(200).send(content);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      console.error(`Missing ${join(DIST_DIR, 'index.html')} — did the build run?`);
-      return json(res, 500, {
-        error: 'Frontend build not found on server. Run npm run build before starting.',
-      });
+    await stat(join(distDir, 'index.html'));
+    return distDir;
+  } catch {
+    console.error(`dist/index.html missing. Attempting npm run build…`);
+    execSync('npm run build', { stdio: 'inherit', cwd: __dirname });
+    const rebuilt = await findDistDir();
+    try {
+      await stat(join(rebuilt, 'index.html'));
+      return rebuilt;
+    } catch {
+      throw new Error(`Build ran but dist/index.html still missing in ${rebuilt}`);
     }
-    return next(err);
   }
+}
+
+function json(res, status, body) {
+  res.status(status).json(body);
 }
 
 async function handleContact(req, res) {
@@ -96,14 +93,34 @@ async function handleContact(req, res) {
   }
 }
 
-const app = express();
-app.use(express.json());
-app.post('/api/contact', handleContact);
-app.use(express.static(DIST_DIR, { extensions: ['html'] }));
-app.use(serveIndex);
+async function main() {
+  const distDir = await ensureFrontend();
+  const indexFile = join(distDir, 'index.html');
 
-app.listen(PORT, () => {
-  console.log(`AACEC server running on port ${PORT}`);
-  console.log(`Serving static files from ${DIST_DIR}`);
-  console.log(`Contact form enabled via SMTP: ${Boolean(process.env.SMTP_HOST)}`);
+  const app = express();
+  app.use(express.json());
+  app.post('/api/contact', handleContact);
+  app.use(express.static(distDir, { extensions: ['html'] }));
+  app.get('*', async (req, res) => {
+    try {
+      const content = await readFile(indexFile);
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.status(200).send(content);
+    } catch {
+      return json(res, 500, {
+        error: 'Frontend build not found on server. Run npm run build before starting.',
+      });
+    }
+  });
+
+  app.listen(PORT, () => {
+    console.log(`AACEC server running on port ${PORT}`);
+    console.log(`Serving static files from ${distDir}`);
+    console.log(`Contact form enabled via SMTP: ${Boolean(process.env.SMTP_HOST)}`);
+  });
+}
+
+main().catch((err) => {
+  console.error('Failed to start:', err);
+  process.exit(1);
 });
