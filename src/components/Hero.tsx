@@ -47,8 +47,8 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div ref={ref} className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center container-px pt-32">
-        <div className="max-w-3xl">
+      <div ref={ref} className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col container-px pt-32 pb-24">
+        <div className="my-auto w-full max-w-3xl">
           {/* Badge */}
           <div className="mb-6 inline-flex animate-fade-in items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md">
             <Leaf className="h-4 w-4 text-brand-green-300" />
