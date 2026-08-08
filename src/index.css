@@ -24,7 +24,7 @@
 
 @layer utilities {
   .pt-32 {
-    padding-top: 2rem;
+    padding-top: 8rem;
   }
   .reveal {
     opacity: 0;
